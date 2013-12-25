@@ -10,10 +10,10 @@ pkg_list=""
 run_cmd=""
 quiet="y"
 pacman_conf="/etc/pacman.conf"
-export iso_label="BlackArch_$(date +%Y%m)"
-iso_publisher="BlackArch Linux <http://www.blackarch.org>"
-iso_application="BlackArch Live/Rescue CD"
-install_dir="blackarch"
+export iso_label="ArchAssault_$(date +%Y%m)"
+iso_publisher="ArchAssault Linux <http://www.archassault.org>"
+iso_application="ArchAssault Live/Rescue CD"
+install_dir="archassault"
 work_dir="work"
 out_dir="out"
 
@@ -21,7 +21,7 @@ out_dir="out"
 # $1: message string
 _msg_info() {
     local _msg="${1}"
-    echo "[mkbaiso] INFO: ${_msg}"
+    echo "[mkassaultiso] INFO: ${_msg}"
 }
 
 # Show an ERROR message then exit with status
@@ -31,7 +31,7 @@ _msg_error() {
     local _msg="${1}"
     local _error=${2}
     echo
-    echo "[mkbaiso] ERROR: ${_msg}"
+    echo "[mkassaultiso] ERROR: ${_msg}"
     echo
     if [[ ${_error} -gt 0 ]]; then
         exit ${_error}
@@ -322,7 +322,7 @@ _mksfs () {
         mksquashfs "${work_dir}/${_src}" "${_sfs_img}" -noappend -comp "${_sfs_comp}" -no-progress
     fi
     _seconds=$((SECONDS - _seconds))
-    printf "[mkbaiso] INFO: Image creation done in %02d:%02d minutes\n" $((_seconds / 60)) $((_seconds % 60))
+    printf "[mkassaultiso] INFO: Image creation done in %02d:%02d minutes\n" $((_seconds / 60)) $((_seconds % 60))
 }
 
 # Makes a filesystem from a source directory.
@@ -464,7 +464,7 @@ command_iso () {
             -volid "${iso_label}" \
             -appid "${iso_application}" \
             -publisher "${iso_publisher}" \
-            -preparer "prepared by mkbaiso" \
+            -preparer "prepared by mkassaultiso" \
             -eltorito-boot isolinux/isolinux.bin \
             -eltorito-catalog isolinux/boot.cat \
             -no-emul-boot -boot-load-size 4 -boot-info-table \
